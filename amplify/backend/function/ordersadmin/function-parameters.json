@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "storage": {
+      "ordersdev": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "ordersprod": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

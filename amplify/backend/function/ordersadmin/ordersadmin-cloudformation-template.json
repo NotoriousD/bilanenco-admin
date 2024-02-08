@@ -1,0 +1,278 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Lambda Function resource stack creation using Amplify CLI",
+    "Parameters": {
+        "CloudWatchRule": {
+            "Type": "String",
+            "Default" : "NONE",
+            "Description" : " Schedule Expression"
+        },
+        "deploymentBucketName": {
+            "Type": "String"
+        },
+        "env": {
+            "Type": "String"
+        },
+        "s3Key": {
+            "Type": "String"
+        }
+        ,
+    
+    
+    
+        "storageordersdevName": {
+            "Type": "String",
+            "Default": "storageordersdevName"
+            },
+        
+        "storageordersdevArn": {
+            "Type": "String",
+            "Default": "storageordersdevArn"
+            },
+        
+    
+        
+    
+        "storageordersdevName": {
+            "Type": "String",
+            "Default": "storageordersdevName"
+            },
+        
+        "storageordersdevArn": {
+            "Type": "String",
+            "Default": "storageordersdevArn"
+            },
+        
+        "storageordersdevStreamArn": {
+            "Type": "String",
+            "Default": "storageordersdevStreamArn"
+            },
+        
+    
+        
+    
+        "storageordersprodName": {
+            "Type": "String",
+            "Default": "storageordersprodName"
+            },
+        
+        "storageordersprodArn": {
+            "Type": "String",
+            "Default": "storageordersprodArn"
+            },
+        
+        "storageordersprodStreamArn": {
+            "Type": "String",
+            "Default": "storageordersprodStreamArn"
+            }
+        
+    
+        
+    
+    },
+    "Conditions": {
+        "ShouldNotCreateEnvResources": {
+            "Fn::Equals": [
+                {
+                    "Ref": "env"
+                },
+                "NONE"
+            ]
+        }
+    },
+    "Resources": {
+        "LambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Metadata": {
+            "aws:asset:path": "./src",
+            "aws:asset:property": "Code"
+          },
+          "Properties": {
+            "Code": {
+                "S3Bucket": {
+                    "Ref": "deploymentBucketName"
+                },
+                "S3Key": {
+                    "Ref": "s3Key"
+                }
+            },
+            "Handler": "index.handler",
+            "FunctionName": {
+                "Fn::If": [
+                    "ShouldNotCreateEnvResources",
+                    "ordersadmin",
+                    {
+
+                        "Fn::Join": [
+                            "",
+                            [
+                                "ordersadmin",
+                                "-",
+                                {
+                                    "Ref": "env"
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Environment": {
+                "Variables" : {"ENV":{"Ref":"env"},"REGION":{"Ref":"AWS::Region"},"STORAGE_ORDERSDEV_NAME":{"Ref":"storageordersdevName"},"STORAGE_ORDERSDEV_ARN":{"Ref":"storageordersdevArn"},"STORAGE_ORDERSDEV_STREAMARN":{"Ref":"storageordersdevStreamArn"},"STORAGE_ORDERSPROD_NAME":{"Ref":"storageordersprodName"},"STORAGE_ORDERSPROD_ARN":{"Ref":"storageordersprodArn"},"STORAGE_ORDERSPROD_STREAMARN":{"Ref":"storageordersprodStreamArn"}}
+            },
+            "Role": { "Fn::GetAtt": ["LambdaExecutionRole", "Arn"] },
+            "Runtime": "nodejs18.x",
+            "Layers": [],
+            "Timeout": 25
+          }
+        },
+        "LambdaExecutionRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName": {
+                    "Fn::If": [
+                        "ShouldNotCreateEnvResources",
+                        "bilanencoadminLambdaRole276767b2",
+                        {
+
+                            "Fn::Join": [
+                                "",
+                                [
+                                    "bilanencoadminLambdaRole276767b2",
+                                    "-",
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "lambda.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+        ,"lambdaexecutionpolicy": {
+            "DependsOn": ["LambdaExecutionRole"],
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyName": "lambda-execution-policy",
+                "Roles": [{ "Ref": "LambdaExecutionRole" }],
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": ["logs:CreateLogGroup",
+                            "logs:CreateLogStream",
+                            "logs:PutLogEvents"],
+                            "Resource": { "Fn::Sub": [ "arn:aws:logs:${region}:${account}:log-group:/aws/lambda/${lambda}:log-stream:*", { "region": {"Ref": "AWS::Region"}, "account": {"Ref": "AWS::AccountId"}, "lambda": {"Ref": "LambdaFunction"}} ]}
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Action": ["dynamodb:DescribeTable","dynamodb:GetItem","dynamodb:Query","dynamodb:Scan","dynamodb:PutItem","dynamodb:UpdateItem","dynamodb:DeleteItem"],
+                            "Resource": [
+                            
+                                { "Ref": "storageordersdevArn" },
+                                {
+                                    "Fn::Join": [
+                                        "/",
+                                        [
+                                            { "Ref": "storageordersdevArn" },
+                                            "index/*"
+                                        ]
+                                    ]
+                                }
+                            
+                            ]
+                        }
+                        
+                    ]
+                }
+            }
+        }
+        ,"AmplifyResourcesPolicy": {
+            "DependsOn": ["LambdaExecutionRole"],
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyName": "amplify-lambda-execution-policy",
+                "Roles": [{ "Ref": "LambdaExecutionRole" }],
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [{"Effect":"Allow","Action":["dynamodb:Put*","dynamodb:Create*","dynamodb:BatchWriteItem","dynamodb:PartiQLInsert","dynamodb:Get*","dynamodb:BatchGetItem","dynamodb:List*","dynamodb:Describe*","dynamodb:Scan","dynamodb:Query","dynamodb:PartiQLSelect","dynamodb:Update*","dynamodb:RestoreTable*","dynamodb:PartiQLUpdate","dynamodb:Delete*","dynamodb:PartiQLDelete"],"Resource":[{"Ref":"storageordersdevArn"},{"Fn::Join":["/",[{"Ref":"storageordersdevArn"},"index/*"]]}]},{"Effect":"Allow","Action":["dynamodb:Put*","dynamodb:Create*","dynamodb:BatchWriteItem","dynamodb:PartiQLInsert","dynamodb:Get*","dynamodb:BatchGetItem","dynamodb:List*","dynamodb:Describe*","dynamodb:Scan","dynamodb:Query","dynamodb:PartiQLSelect","dynamodb:Update*","dynamodb:RestoreTable*","dynamodb:PartiQLUpdate","dynamodb:Delete*","dynamodb:PartiQLDelete"],"Resource":[{"Ref":"storageordersprodArn"},{"Fn::Join":["/",[{"Ref":"storageordersprodArn"},"index/*"]]}]}]
+                }
+            }
+        }
+        
+        
+        
+        ,"CloudWatchEvent": {
+            "Type": "AWS::Events::Rule",
+            "Properties": {
+                "Description": "Schedule rule for Lambda",
+                "ScheduleExpression": {
+                    "Ref": "CloudWatchRule"
+                },
+                "State": "ENABLED",
+                "Targets": [{
+                    "Arn": { "Fn::GetAtt": ["LambdaFunction", "Arn"] },
+                    "Id": {
+                        "Ref": "LambdaFunction"
+                    }
+                }]
+            }
+        }
+        ,"PermissionForEventsToInvokeLambda": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "FunctionName": {
+                    "Ref": "LambdaFunction"
+                    },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "events.amazonaws.com",
+                "SourceArn": { "Fn::GetAtt": ["CloudWatchEvent", "Arn"] }
+            }
+        }
+        
+    },
+    "Outputs": {
+        "Name": {
+            "Value": {
+                "Ref": "LambdaFunction"
+            }
+        },
+        "Arn": {
+            "Value": {"Fn::GetAtt": ["LambdaFunction", "Arn"]}
+        },
+        "Region": {
+            "Value": {
+                "Ref": "AWS::Region"
+            }
+        },
+        "LambdaExecutionRole": {
+            "Value": {
+                "Ref": "LambdaExecutionRole"
+            }
+        }
+        
+        ,"CloudWatchEventRule": {
+            "Value": {
+                "Ref": "CloudWatchEvent"
+            }
+        }
+        
+    }
+}
