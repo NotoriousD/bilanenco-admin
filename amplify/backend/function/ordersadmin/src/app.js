@@ -28,7 +28,7 @@ const express = require('express')
 const ddbClient = new DynamoDBClient({ region: 'eu-west-1' });
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
 
-let tableName = "ordersprod";
+let tableName = "orders-prod";
 // if (process.env.ENV && process.env.ENV !== "NONE") {
 //   tableName = tableName + '-' + process.env.ENV;
 // }
