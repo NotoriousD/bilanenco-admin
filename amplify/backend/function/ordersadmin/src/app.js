@@ -23,7 +23,7 @@ const awsServerlessExpressMiddleware = require('aws-serverless-express/middlewar
 const bodyParser = require('body-parser')
 const express = require('express')
 
-const ddbClient = new DynamoDBClient({ region: process.env.TABLE_REGION });
+const ddbClient = new DynamoDBClient({ region: 'eu-west-1' });
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
 
 let tableName = "ordersprod";
@@ -69,9 +69,10 @@ const convertUrlType = (param, type) => {
 ************************************/
 
 app.get('/orders', async function(req, res) {
-  await ddbDocClient.scan({
+  const params = {
     TableName: tableName,
-  }, (err, data) => {
+  }
+  await ddbDocClient.send(new ScanCommand(params), (err, data) => {
     if (err) {
       res.status(404).json(err)
       return
