@@ -4,9 +4,9 @@ import { RouterProvider } from 'react-router-dom'
 
 import ErrorBoundary from 'shared/ui/ErrorBoundary/ErrorBoundary'
 
-import { router } from './router'
+import awsExports from '../aws-exports'
 
-import awsExports from "../aws-exports"
+import { router } from './router'
 
 Amplify.configure({ ...awsExports })
 
