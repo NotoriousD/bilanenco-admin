@@ -69,7 +69,7 @@ const convertUrlType = (param, type) => {
 ************************************/
 
 app.get('/orders', async function(req, res) {
-  await docClient.scan({
+  await ddbDocClient.scan({
     TableName: tableName,
   }, (err, data) => {
     if (err) {

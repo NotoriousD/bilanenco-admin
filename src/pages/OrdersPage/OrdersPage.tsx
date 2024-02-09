@@ -7,7 +7,7 @@ export const OrdersPage: React.FC = () => {
     const fetchOrders = async () => {
       const response = await get({
         apiName: 'ordersadmin',
-        path: 'orders'
+        path: '/orders'
       })
       console.log(response)
     }
