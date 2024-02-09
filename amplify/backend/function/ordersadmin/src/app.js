@@ -7,6 +7,8 @@ See the License for the specific language governing permissions and limitations 
 */
 
 /* Amplify Params - DO NOT EDIT
+	API_ORDERSADMIN_APIID
+	API_ORDERSADMIN_APINAME
 	ENV
 	REGION
 	STORAGE_ORDERSDEV_ARN
