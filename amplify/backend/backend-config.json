@@ -15,6 +15,34 @@
       "service": "API Gateway"
     }
   },
+  "auth": {
+    "bilanencoadmin3eaa63a7": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
   "function": {
     "ordersadmin": {
       "build": true,
@@ -55,6 +83,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_ordersadmin_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ordersadmin"
+        }
+      ]
+    },
+    "AMPLIFY_function_ordersadmin_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ordersadmin"
+        }
+      ]
+    },
     "AMPLIFY_storage_ordersdev_arn": {
       "usedBy": [
         {
