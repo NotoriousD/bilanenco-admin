@@ -25,7 +25,7 @@ const awsServerlessExpressMiddleware = require('aws-serverless-express/middlewar
 const bodyParser = require('body-parser')
 const express = require('express')
 
-const ddbClient = new DynamoDBClient({ region: 'eu-west-1' });
+const ddbClient = new DynamoDBClient({ region: process.env.TABLE_REGION });
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
 
 let tableName = "orders-prod";

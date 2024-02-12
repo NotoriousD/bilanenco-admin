@@ -44,6 +44,25 @@
     }
   },
   "function": {
+    "coursesadmin": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "coursesprod"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "ordersadmin": {
       "build": true,
       "dependsOn": [
@@ -83,6 +102,14 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_coursesadmin_tableRegion": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "coursesadmin"
+        }
+      ]
+    },
     "AMPLIFY_function_ordersadmin_deploymentBucketName": {
       "usedBy": [
         {
@@ -96,6 +123,62 @@
         {
           "category": "function",
           "resourceName": "ordersadmin"
+        }
+      ]
+    },
+    "AMPLIFY_function_ordersadmin_tableRegion": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ordersadmin"
+        }
+      ]
+    },
+    "AMPLIFY_storage_coursesprod_arn": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "coursesprod"
+        }
+      ]
+    },
+    "AMPLIFY_storage_coursesprod_partitionKeyName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "coursesprod"
+        }
+      ]
+    },
+    "AMPLIFY_storage_coursesprod_partitionKeyType": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "coursesprod"
+        }
+      ]
+    },
+    "AMPLIFY_storage_coursesprod_region": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "coursesprod"
+        }
+      ]
+    },
+    "AMPLIFY_storage_coursesprod_streamArn": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "coursesprod"
+        }
+      ]
+    },
+    "AMPLIFY_storage_coursesprod_tableName": {
+      "usedBy": [
+        {
+          "category": "storage",
+          "resourceName": "coursesprod"
         }
       ]
     },
@@ -197,6 +280,12 @@
     }
   },
   "storage": {
+    "coursesprod": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB",
+      "serviceType": "imported"
+    },
     "ordersdev": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",

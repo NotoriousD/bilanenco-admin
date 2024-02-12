@@ -15,5 +15,11 @@
       ]
     }
   },
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "tableRegion",
+      "environmentVariableName": "TABLE_REGION"
+    }
+  ]
 }
