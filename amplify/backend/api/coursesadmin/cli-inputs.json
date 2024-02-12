@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/courses": {
+      "name": "/courses",
+      "lambdaFunction": "coursesadmin",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/courses/{id}": {
+      "name": "/courses/{id}",
+      "lambdaFunction": "coursesadmin",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

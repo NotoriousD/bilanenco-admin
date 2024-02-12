@@ -116,34 +116,7 @@ app.post('/courses', async function(req, res) {
   }
 });
 
-app.post('/courses', async function(req, res) {
-  const { error } = validation.validate(req.body)
-
-  if(error) {
-    res.statusCode = 404
-    res.json({ message: error.message })
-  }
-
-  const course = {
-    ...req.body,
-    packages: req.body.packages.map((item) => ({ ...item, id: uuid.v4() }))
-  }
-
-  const params = {
-    TableName: tableName,
-    Item: course
-  }
-
-  try {
-    const data = await ddbDocClient.send(new PutCommand(params))
-    res.json(data.Items)
-  } catch (err) {
-    res.statusCode = 500;
-    res.json({error: 'Could not load items: ' + err.message});
-  }
-});
-
-app.delete('/course/:id', async function(req, res) {
+app.delete('/courses/:id', async function(req, res) {
   const { id } = req.params
 
   let removeItemParams = {

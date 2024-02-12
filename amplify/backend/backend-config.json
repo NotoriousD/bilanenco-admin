@@ -1,5 +1,19 @@
 {
   "api": {
+    "coursesadmin": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "coursesadmin"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "ordersadmin": {
       "dependsOn": [
         {
