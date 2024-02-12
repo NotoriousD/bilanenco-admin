@@ -7,13 +7,6 @@
       "permissions": {
         "setting": "open"
       }
-    },
-    "/courses/{id}": {
-      "name": "/courses/{id}",
-      "lambdaFunction": "coursesadmin",
-      "permissions": {
-        "setting": "open"
-      }
     }
   }
 }
