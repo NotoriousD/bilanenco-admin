@@ -47,6 +47,9 @@
     "apiordersadminApiId": {
       "Type": "String",
       "Default": "apiordersadminApiId"
+    },
+    "tableRegion": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -125,6 +128,9 @@
             },
             "API_ORDERSADMIN_APIID": {
               "Ref": "apiordersadminApiId"
+            },
+            "TABLE_REGION": {
+              "Ref": "tableRegion"
             }
           }
         },
