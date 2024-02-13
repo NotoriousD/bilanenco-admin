@@ -31,7 +31,16 @@
         }
       },
       "function": {
+        "ordersadmin": {
+          "deploymentBucketName": "amplify-bilanencoadmin-dev-190103-deployment",
+          "s3Key": "amplify-builds/ordersadmin-58322b33553151387150-build.zip"
+        }
+      },
+      "api": {
         "ordersadmin": {}
+      },
+      "auth": {
+        "bilanencoadmin3eaa63a7": {}
       }
     }
   }

@@ -1,16 +1,37 @@
-import React, { Suspense } from 'react'
-import { RouterProvider } from 'react-router-dom'
+import { Amplify } from 'aws-amplify'
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary'
+import { AppRouter } from 'components/router'
+import React from 'react'
 
-import ErrorBoundary from 'shared/ui/ErrorBoundary/ErrorBoundary'
+import { CognitoAuthProvider } from 'services/auth'
 
-import { router } from './router'
+import awsExports from '../aws-exports'
+
+import '@aws-amplify/ui-react/styles.css'
+
+Amplify.configure(awsExports)
+const existingConfig = Amplify.getConfig()
+
+Amplify.configure({
+  ...existingConfig,
+  API: {
+    ...existingConfig.API,
+    REST: {
+      ...existingConfig.API?.REST,
+      'im-api': {
+        endpoint: 'ordersadmin',
+        region: 'eu-west-1'
+      }
+    }
+  }
+})
 
 function App() {
   return (
     <ErrorBoundary>
-      <Suspense>
-        <RouterProvider router={router} />
-      </Suspense>
+      <CognitoAuthProvider>
+        <AppRouter />
+      </CognitoAuthProvider>
     </ErrorBoundary>
   )
 }
