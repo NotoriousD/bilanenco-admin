@@ -1,6 +1,8 @@
 import { Amplify } from 'aws-amplify'
+import { Provider } from 'react-redux'
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary'
 import { AppRouter } from 'components/router'
+import { store } from 'stores'
 import React from 'react'
 
 import { CognitoAuthProvider } from 'services/auth'
@@ -30,9 +32,11 @@ Amplify.configure({
 function App() {
   return (
     <ErrorBoundary>
-      <CognitoAuthProvider>
-        <AppRouter />
-      </CognitoAuthProvider>
+      <Provider store={store}>
+        <CognitoAuthProvider>
+          <AppRouter />
+        </CognitoAuthProvider>
+      </Provider>
     </ErrorBoundary>
   )
 }
