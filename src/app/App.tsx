@@ -26,6 +26,7 @@ Amplify.configure({
   }
 })
 
+
 function App() {
   return (
     <ErrorBoundary>
