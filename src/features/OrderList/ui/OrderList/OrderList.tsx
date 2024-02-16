@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from 'shared/ui/Table'
+} from 'views/Table'
 
 export const OrderList = () => {
   return (
