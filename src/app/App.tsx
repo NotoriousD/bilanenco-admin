@@ -4,7 +4,6 @@ import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary'
 import { AppRouter } from 'components/router'
 import React from 'react'
 import { Provider } from 'react-redux'
-
 import { CognitoAuthProvider } from 'services/auth'
 import { store } from 'stores'
 

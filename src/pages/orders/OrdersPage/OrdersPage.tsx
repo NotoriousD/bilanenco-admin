@@ -1,44 +1,12 @@
 import { OrdersAPI } from 'api/orders'
 import { get } from 'aws-amplify/api'
-
 import React, { useEffect } from 'react'
-
-enum Currency {
-  USD = 'usd',
-  UAH = 'uah'
-}
-
-enum OrderStatuses {
-  Success = 'success',
-  Created = 'created',
-  Processing = 'processing'
-}
-
-enum OrderTypes {
-  FULL = 'FULL',
-  PRESALE = 'PRESALE'
-}
-
-interface Order {
-  contact_id: string | null
-  created_date: string
-  currency: Currency
-  email: string
-  fullName: string
-  funnel: string | null
-  id: string
-  invoice_id: string
-  order_status: OrderStatuses
-  order_type: OrderTypes
-  package_id: string
-  paied_date: string | null
-  phone: string
-  product_id: string
-  product_type: string
-  purchase: string
-  subscribe: boolean
-  total_amount: number
-}
+import { Header } from 'widgets/Header'
+import { Sidebar } from 'widgets/Sidebar'
+import { OrderList } from 'features/OrderList'
+import { Container } from 'shared/ui/Container'
+import { Content } from 'shared/ui/Content'
+import { Layout } from 'shared/ui/Layout'
 
 export const OrdersPage: React.FC = () => {
   useEffect(() => {
@@ -49,5 +17,15 @@ export const OrdersPage: React.FC = () => {
     fetchOrders()
   }, [])
 
-  return <div>OrdersPage</div>
+  return (
+    <Layout>
+      <Sidebar />
+      <Container>
+        <Header />
+        <Content>
+          <OrderList />
+        </Content>
+      </Container>
+    </Layout>
+  )
 }
