@@ -1,18 +1,20 @@
 {
   "api": {
-    "coursesadmin": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "coursesadmin"
+    "bilanencoadmin": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
+          }
         }
-      ],
+      },
       "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
+      "service": "AppSync"
     },
     "ordersadmin": {
       "dependsOn": [
@@ -58,25 +60,6 @@
     }
   },
   "function": {
-    "coursesadmin": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributeEnvMap": {
-            "Arn": "TABLE_ARN",
-            "Name": "TABLE_NAME"
-          },
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "storage",
-          "resourceName": "coursesprod"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "ordersadmin": {
       "build": true,
       "dependsOn": [
@@ -116,14 +99,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_coursesadmin_tableRegion": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "coursesadmin"
-        }
-      ]
-    },
     "AMPLIFY_function_ordersadmin_deploymentBucketName": {
       "usedBy": [
         {

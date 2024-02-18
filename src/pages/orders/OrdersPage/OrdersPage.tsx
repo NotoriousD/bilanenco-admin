@@ -1,3 +1,4 @@
+import { OrdersAPI } from 'api/orders'
 import { get } from 'aws-amplify/api'
 
 import React, { useEffect } from 'react'
@@ -42,13 +43,7 @@ interface Order {
 export const OrdersPage: React.FC = () => {
   useEffect(() => {
     const fetchOrders = async () => {
-      const restOperation = await get({
-        apiName: 'ordersadmin',
-        path: '/orders'
-      })
-      const { body } = await restOperation.response
-      const response = await body.json()
-      console.log(response)
+      await OrdersAPI.getFullOrders()
     }
 
     fetchOrders()

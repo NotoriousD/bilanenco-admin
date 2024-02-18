@@ -1,11 +1,12 @@
 import { Amplify } from 'aws-amplify'
-import { Provider } from 'react-redux'
+import { generateClient } from 'aws-amplify/api'
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary'
 import { AppRouter } from 'components/router'
-import { store } from 'stores'
 import React from 'react'
+import { Provider } from 'react-redux'
 
 import { CognitoAuthProvider } from 'services/auth'
+import { store } from 'stores'
 
 import awsExports from '../aws-exports'
 
@@ -28,6 +29,7 @@ Amplify.configure({
   }
 })
 
+const client = generateClient()
 
 function App() {
   return (
