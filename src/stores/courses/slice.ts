@@ -12,16 +12,15 @@ const initialState: CoursesState = {
   isAuth: false,
   status: null,
   isSumbitting: false,
-  isSubmitted: false,
+  isSubmitted: false
 }
 
 const coursesSlice = createSlice({
   name: COURSES_FEATURE_KEY,
   initialState,
   reducers: {
-    setAuthData: (state, action: PayloadAction<any>) => {
-    },
-  },
+    setAuthData: (state, action: PayloadAction<any>) => {}
+  }
 })
 
 export const {} = coursesSlice.actions
