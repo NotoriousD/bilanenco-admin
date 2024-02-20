@@ -1,43 +1,31 @@
 import { Amplify } from 'aws-amplify'
-import { generateClient } from 'aws-amplify/api'
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary'
 import { AppRouter } from 'components/router'
 import React from 'react'
 import { Provider } from 'react-redux'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
 import { CognitoAuthProvider } from 'services/auth'
 import { store } from 'stores'
 
-import awsExports from '../aws-exports'
+import config from '../amplifyconfiguration.json'
 
 import '@aws-amplify/ui-react/styles.css'
 
-Amplify.configure(awsExports)
-const existingConfig = Amplify.getConfig()
+Amplify.configure(config)
 
-Amplify.configure({
-  ...existingConfig,
-  API: {
-    ...existingConfig.API,
-    REST: {
-      ...existingConfig.API?.REST,
-      'im-api': {
-        endpoint: 'ordersadmin',
-        region: 'eu-west-1'
-      }
-    }
-  }
-})
-
-const client = generateClient()
+const queryClient = new QueryClient()
 
 function App() {
   return (
     <ErrorBoundary>
-      <Provider store={store}>
-        <CognitoAuthProvider>
-          <AppRouter />
-        </CognitoAuthProvider>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <CognitoAuthProvider>
+            <AppRouter />
+          </CognitoAuthProvider>
+        </Provider>
+      </QueryClientProvider>
     </ErrorBoundary>
   )
 }

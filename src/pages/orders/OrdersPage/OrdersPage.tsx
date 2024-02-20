@@ -1,6 +1,7 @@
-import { OrdersAPI } from 'api/orders'
-import { get } from 'aws-amplify/api'
-import React, { useEffect } from 'react'
+import React from 'react'
+
+import { useAllOrdersQuery } from 'hooks/queries/useAllOrdersQuery'
+
 import { Header } from 'widgets/Header'
 import { Sidebar } from 'widgets/Sidebar'
 import { OrderList } from 'features/OrderList'
@@ -9,14 +10,9 @@ import { Content } from 'shared/ui/Content'
 import { Layout } from 'shared/ui/Layout'
 
 export const OrdersPage: React.FC = () => {
-  useEffect(() => {
-    const fetchOrders = async () => {
-      await OrdersAPI.getFullOrders()
-    }
+  const { data, isLoading, isPending, isError } = useAllOrdersQuery()
 
-    fetchOrders()
-  }, [])
-
+  console.log(data)
   return (
     <Layout>
       <Sidebar />

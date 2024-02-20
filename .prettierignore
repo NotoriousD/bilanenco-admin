@@ -3,3 +3,5 @@ amplify
 # Ignore artifacts:
 build
 coverage
+src/amplifyconfiguration.json
+src/graphql

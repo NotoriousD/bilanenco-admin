@@ -1,9 +1,8 @@
 {
   "extends": [
-    "@feature-sliced/eslint-config/rules/import-order",
-    "@feature-sliced/eslint-config/rules/layers-slices",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",

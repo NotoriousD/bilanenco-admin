@@ -46,7 +46,8 @@
         }
       },
       "api": {
-        "ordersadmin": {}
+        "ordersadmin": {},
+        "bilanencoadmin": {}
       },
       "auth": {
         "bilanencoadmin3eaa63a7": {}

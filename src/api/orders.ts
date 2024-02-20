@@ -1,15 +1,17 @@
-import { AWSRequests } from './http'
+import { Orders } from 'API'
+import { generateClient } from 'aws-amplify/api'
 
-const ORDERS_API_FEATURE_KEY = 'ordersadmin'
+import { listOrders } from 'graphql/queries'
+
+const client = generateClient()
 
 export const OrdersAPI = {
-  async getFullOrders() {
+  getAllOrders: async () => {
     try {
-      const response = await AWSRequests.handleGet({
-        apiName: ORDERS_API_FEATURE_KEY,
-        path: '/orders'
+      const response = await client.graphql({
+        query: listOrders
       })
-      console.log(response)
+      return response.data?.listOrders
     } catch (e) {
       console.log(e)
     }
