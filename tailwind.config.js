@@ -13,6 +13,10 @@ module.exports = {
       }
     },
     extend: {
+      width: {
+        '1/7': '15%',
+        '6/7': '85%'
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

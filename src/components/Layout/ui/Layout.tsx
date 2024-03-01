@@ -6,10 +6,10 @@ import { Sidebar } from 'views/Sidebar'
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="flex min-h-screen justify-start flex-wrap items-start">
-      <Sidebar />
+    <div>
+      <Header />
       <Container>
-        <Header />
+        <Sidebar />
         <Content>{children}</Content>
       </Container>
     </div>

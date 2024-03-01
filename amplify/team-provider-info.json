@@ -41,7 +41,7 @@
       "function": {
         "ordersadmin": {
           "deploymentBucketName": "amplify-bilanencoadmin-dev-190103-deployment",
-          "s3Key": "amplify-builds/ordersadmin-58322b33553151387150-build.zip",
+          "s3Key": "amplify-builds/ordersadmin-34704669623155746339-build.zip",
           "tableRegion": "eu-west-1"
         }
       },

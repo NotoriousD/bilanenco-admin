@@ -16,20 +16,18 @@ import {
   TableRow
 } from 'views/Table'
 
-type TableProps<T> = {
-  columns?: ColumnDef<T, any>[]
-  contentData?: T[]
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
 }
 
-export const OrderList = <T extends unknown>({
-  columns = [],
-  contentData = []
-}: TableProps<T>) => {
-  console.log(contentData)
-
+export function OrderList<TData, TValue>({
+  columns,
+  data
+}: DataTableProps<TData, TValue>) {
   const table = useReactTable({
+    data,
     columns,
-    data: contentData,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     autoResetAll: false
@@ -82,13 +80,9 @@ export const OrderList = <T extends unknown>({
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id} className="table_row">
+            <TableRow key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <TableCell
-                  key={cell.id}
-                  className="table_row_cell"
-                  data-cell-name={cell.column.id}
-                >
+                <TableCell key={cell.id} data-cell-name={cell.column.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}

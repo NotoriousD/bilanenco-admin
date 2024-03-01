@@ -6,7 +6,9 @@ export enum Currency {
 export enum OrderStatuses {
   Success = 'success',
   Created = 'created',
-  Processing = 'processing'
+  Processing = 'processing',
+  Pending = 'pending',
+  Failure = 'failure'
 }
 
 export enum OrderTypes {

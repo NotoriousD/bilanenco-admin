@@ -11,7 +11,7 @@ export const useAllOrdersQuery = (
 ) => {
   return useQuery<PaginatedOrdersResponse>({
     queryKey: [ORDERS_FEATURE_KEY],
-    queryFn: () => OrdersAPI.getAllOrders(),
+    queryFn: () => OrdersAPI.getOrders(),
     ...queryOptions
   })
 }
