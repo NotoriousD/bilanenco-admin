@@ -1,12 +1,13 @@
-import { Amplify } from 'aws-amplify'
-import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary'
-import { AppRouter } from 'components/router'
 import React from 'react'
+import { Amplify } from 'aws-amplify'
 import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { CognitoAuthProvider } from 'services/auth'
 import { store } from 'stores'
+import { CognitoAuthProvider } from 'services/auth'
+
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary'
+import { AppRouter } from 'components/router'
 
 import config from '../amplifyconfiguration.json'
 

@@ -64,6 +64,8 @@ export const listOrders = /* GraphQL */ `query ListOrders(
       __typename
     }
     nextToken
+    scannedCount
+    count
     __typename
   }
 }

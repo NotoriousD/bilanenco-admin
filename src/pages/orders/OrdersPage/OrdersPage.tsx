@@ -98,10 +98,14 @@ const initialColumnsData = [
 
 export const OrdersPage: React.FC = () => {
   const { data, isLoading, isPending, isError } = useAllOrdersQuery()
-  console.log(data)
   return (
     <Layout>
-      {data && <OrderList columns={initialColumnsData} contentData={data} />}
+      {data?.items.length && (
+        <OrderList
+          columns={initialColumnsData}
+          contentData={data.items as Orders[]}
+        />
+      )}
     </Layout>
   )
 }

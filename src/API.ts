@@ -205,6 +205,8 @@ export type ModelOrdersConnection = {
   __typename: 'ModelOrdersConnection'
   items: Array<Orders | null>
   nextToken?: string | null
+  scannedCount?: number | null
+  count?: number | null
 }
 
 export type ModelSubscriptionOrdersFilterInput = {
@@ -435,6 +437,8 @@ export type ListOrdersQuery = {
       updatedAt?: string | null
     } | null>
     nextToken?: string | null
+    scannedCount?: number | null
+    count?: number | null
   } | null
 }
 

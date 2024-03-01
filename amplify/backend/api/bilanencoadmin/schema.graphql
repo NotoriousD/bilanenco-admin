@@ -24,3 +24,10 @@ type Orders @model @auth(rules: [{ allow: public }]){
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
 }
+
+type ModelOrdersConnection {
+  items: [Orders]!
+  nextToken: String
+  scannedCount: Int
+  count: Int
+}
