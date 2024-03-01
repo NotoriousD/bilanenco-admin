@@ -9,7 +9,7 @@ const ORDERS_FEATURE_KEY = 'orders'
 export const useAllOrdersQuery = (queryOptions?: UseQueryOptions<Orders[]>) => {
   return useQuery<Orders[]>({
     queryKey: [ORDERS_FEATURE_KEY],
-    queryFn: () => OrdersAPI.getAllOrders(),
+    queryFn: () => OrdersAPI.getOrders(),
     ...queryOptions
   })
 }

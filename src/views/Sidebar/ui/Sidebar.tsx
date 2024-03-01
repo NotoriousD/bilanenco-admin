@@ -4,8 +4,8 @@ import Logo from 'shared/assets/logo.svg'
 
 export const Sidebar: React.FC = () => {
   return (
-    <aside className="bg-primary w-1/6 min-h-screen  border-r-black sticky top-0">
-      <div className="p-8 pt-6 pb-6">
+    <aside className="bg-primary w-1/7 min-h-screen  border-r-black sticky top-0">
+      <div className="p-4 pt-6 pb-6">
         <img src={Logo} alt="" />
       </div>
       <Navigation />

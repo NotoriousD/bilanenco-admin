@@ -41,7 +41,7 @@ const navLinks: LinkHelperType[] = [
 
 export const Navigation = () => {
   return (
-    <div className="text-secondary p-4 text-lg flex flex-col">
+    <div className="text-secondary p-2 text-md flex flex-col">
       {navLinks &&
         navLinks.map((link) => (
           <LinkHelper
@@ -65,11 +65,11 @@ export const LinkHelper: React.FC<LinkHelperType> = ({
     <Link
       to={path}
       className={cn(
-        'flex justify-start items-center p-4 rounded-lg transition ease duration-300 hover:bg-secondary hover:text-primary',
+        'flex justify-start items-center p-2 rounded-lg transition ease duration-300 hover:bg-secondary hover:text-primary',
         `${linkStyles}`
       )}
     >
-      <Icon className="w-6 h-6 mr-2" />
+      <Icon className="w-4 h-4 mr-2" />
       {name}
     </Link>
   )
