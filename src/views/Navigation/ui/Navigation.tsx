@@ -7,7 +7,7 @@ import {
   ShoppingCart
 } from 'lucide-react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export interface LinkHelperType {
   name: string
@@ -40,6 +40,7 @@ const navLinks: LinkHelperType[] = [
 ]
 
 export const Navigation = () => {
+  const { pathname } = useLocation()
   return (
     <div className=" text-md flex flex-col">
       {navLinks &&
@@ -47,7 +48,7 @@ export const Navigation = () => {
           <Button
             asChild
             key={link.name}
-            variant={'ghost'}
+            variant={pathname === link.path ? 'default' : 'ghost'}
             className="text-left justify-start hover:bg-primary/90 hover:text-secondary rounded-none"
           >
             <Link to={link.path}>
