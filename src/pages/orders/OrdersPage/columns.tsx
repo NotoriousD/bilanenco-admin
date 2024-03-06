@@ -1,14 +1,14 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { Orders } from 'API'
-import { ErrorStatus } from 'components/Error/ErrorStatus'
+import { ErrorItem } from 'components/Error/ErrorItem'
+import dayjs from 'dayjs'
 import { Check } from 'lucide-react'
-import moment from 'moment'
 import { OrderStatuses } from 'types'
 
 const dateFormat = `DD/MM/YYYY HH:mm`
 
 const dateFormate = (date: string, format: string) => {
-  return moment(date).format(format)
+  return dayjs(date).format(format)
 }
 
 export const columns: ColumnDef<Orders>[] = [
@@ -20,7 +20,7 @@ export const columns: ColumnDef<Orders>[] = [
     header: 'Order Status',
     cell: (info) => {
       const status = info.getValue() as OrderStatuses
-      return <ErrorStatus status={status} />
+      return <ErrorItem status={status} />
     }
   },
   {

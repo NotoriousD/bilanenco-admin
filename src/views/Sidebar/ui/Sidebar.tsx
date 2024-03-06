@@ -1,13 +1,9 @@
 import React from 'react'
 import { Navigation } from 'views/Navigation'
-import Logo from 'shared/assets/logo.svg'
 
 export const Sidebar: React.FC = () => {
   return (
-    <aside className="bg-primary w-1/7 min-h-screen  border-r-black sticky top-0">
-      <div className="p-4 pt-6 pb-6">
-        <img src={Logo} alt="" />
-      </div>
+    <aside className="pt-4 w-1/7 min-h-screen  border-r-black sticky top-0">
       <Navigation />
     </aside>
   )

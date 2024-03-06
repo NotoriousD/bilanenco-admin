@@ -3,6 +3,7 @@ import { useAllOrdersQuery } from 'hooks/queries/useAllOrdersQuery'
 import { OrderList } from 'views/OrderList'
 import { columns } from './columns'
 import { Orders } from 'API'
+import { Loader } from 'components/Loader'
 
 export const OrdersPage = () => {
   const { data, isLoading, isPending, isError } = useAllOrdersQuery()
@@ -10,8 +11,10 @@ export const OrdersPage = () => {
   return (
     <Layout>
       <>
-        {isLoading && <p>Loading</p>}
-        {data?.items.length && <OrderList columns={columns} data={data.items as Orders[]} />}
+        {isLoading && <Loader />}
+        {data?.items.length && (
+          <OrderList columns={columns} data={data?.items as Orders[]} />
+        )}
       </>
     </Layout>
   )
