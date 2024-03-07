@@ -8,7 +8,7 @@ interface ICognitoAuth {
   user?: AuthUser
 }
 
-const CognitoAuthContext = createContext<ICognitoAuth>(null as any)
+export const CognitoAuthContext = createContext<ICognitoAuth>(null as any)
 
 export const useCognitoAuth = (): ICognitoAuth => useContext(CognitoAuthContext)
 
